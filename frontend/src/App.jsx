@@ -3,7 +3,9 @@ import { supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 
-const API_BASE = 'http://localhost:5000/api';
+const IS_PROD = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
+const API_BASE = IS_PROD ? '/api' : 'http://localhost:5000/api';
+const LINK_BASE = IS_PROD ? `${window.location.origin}/l` : 'http://localhost:5000/l';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -1733,7 +1735,7 @@ export default function App() {
                 <ul>
                   <li><a href="#" onClick={(e) => { e.preventDefault(); setLandingTab('features'); }}>Firewall Features</a></li>
                   <li><a href="#" onClick={(e) => { e.preventDefault(); setLandingTab('pricing'); }}>Pricing Tiers</a></li>
-                  <li><a href="http://localhost:5000/l/demo-link" target="_blank" rel="noreferrer">Interactive Sandbox</a></li>
+                  <li><a href={`${LINK_BASE}/demo-link`} target="_blank" rel="noreferrer">Interactive Sandbox</a></li>
                 </ul>
               </div>
               <div className="footer-col">
@@ -2699,7 +2701,7 @@ export default function App() {
                                   </strong>
                                   <button
                                     onClick={() => {
-                                      navigator.clipboard.writeText(`http://localhost:5000/l/${encodeURIComponent(link.slug)}`);
+                                      navigator.clipboard.writeText(`${LINK_BASE}/${encodeURIComponent(link.slug)}`);
                                       showMessage("Secure Link copied to clipboard!", 'success');
                                     }}
                                     className="copy-button"
@@ -2763,7 +2765,7 @@ export default function App() {
                               <td>
                                 <div className="action-row-buttons">
                                   <a
-                                    href={`http://localhost:5000/l/${encodeURIComponent(link.slug)}`}
+                                    href={`${LINK_BASE}/${encodeURIComponent(link.slug)}`}
                                     target="_blank"
                                     rel="noreferrer"
                                     className="btn-action-icon"
@@ -4004,7 +4006,7 @@ export async function middleware(request) {
   const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
 
   try {
-    const res = await fetch(\`http://localhost:5000/api/firewall/verify-ip?ip=\${ip}\`, {
+    const res = await fetch(\`https://api.linkflare.in/api/firewall/verify-ip?ip=\${ip}\`, {
       headers: { 'Authorization': 'Bearer lf_live_998877665544' }
     });
     const decision = await res.json();
@@ -5416,7 +5418,7 @@ export async function middleware(request) {
           <div 
             className="context-menu-item"
             onClick={() => {
-              navigator.clipboard.writeText(`http://localhost:5000/l/${encodeURIComponent(contextMenu.link.slug)}`);
+              navigator.clipboard.writeText(`${LINK_BASE}/${encodeURIComponent(contextMenu.link.slug)}`);
               showMessage("Link copied successfully!", 'success');
               setContextMenu(null);
             }}
