@@ -131,16 +131,16 @@ async function evaluateFirewall(link, req) {
   const fingerprint = crypto.createHash('md5').update(userAgentStr + clientInfo.deviceType + clientInfo.country).digest('hex');
 
   // Automatically lock device if any geo or vpn restrictions are active
-  if (link.vpn_blocking === 1 || (link.geo_blocking && link.geo_blocking.length > 0)) {
-    if (!linkFingerprints.has(link.id)) {
-      linkFingerprints.set(link.id, fingerprint);
-    } else {
-      const lockedFingerprint = linkFingerprints.get(link.id);
-      if (lockedFingerprint !== fingerprint) {
-        return { allowed: false, status: 'BLOCKED_FINGERPRINT_MISMATCH', clientInfo };
-      }
-    }
-  }
+  // if (link.vpn_blocking === 1 || (link.geo_blocking && link.geo_blocking.length > 0)) {
+  //   if (!linkFingerprints.has(link.id)) {
+  //     linkFingerprints.set(link.id, fingerprint);
+  //   } else {
+  //     const lockedFingerprint = linkFingerprints.get(link.id);
+  //     if (lockedFingerprint !== fingerprint) {
+  //       return { allowed: false, status: 'BLOCKED_FINGERPRINT_MISMATCH', clientInfo };
+  //     }
+  //   }
+  // }
 
 
 
