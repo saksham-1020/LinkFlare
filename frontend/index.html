@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkFlare | Next-Gen Link Firewall & Analytics</title>
+    
+    <!-- 🚨 Diagnostic Runtime Error Catcher (Resolves White Screens) -->
+    <script>
+      window.onerror = function(message, source, lineno, colno, error) {
+        var div = document.createElement('div');
+        div.style.position = 'fixed';
+        div.style.top = '0';
+        div.style.left = '0';
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.backgroundColor = '#7f1d1d';
+        div.style.color = '#fff';
+        div.style.padding = '40px';
+        div.style.boxSizing = 'border-box';
+        div.style.zIndex = '99999';
+        div.style.fontFamily = 'monospace';
+        div.style.overflow = 'auto';
+        div.style.textAlign = 'left';
+        div.innerHTML = '<h1 style="font-size:24px;margin-top:0;">🚨 Client-Side Runtime Crash</h1>' +
+                        '<p><strong>Error:</strong> ' + message + '</p>' +
+                        '<p><strong>Source:</strong> ' + source + ' (Line ' + lineno + ', Col ' + colno + ')</p>' +
+                        '<pre style="background:rgba(0,0,0,0.3);padding:15px;border-radius:6px;overflow-x:auto;">' + (error && error.stack ? error.stack : 'No stack trace available') + '</pre>' +
+                        '<p style="margin-top:20px;font-size:14px;color:#fca5a5;">Please copy this error message and paste it in the chat so we can fix it instantly!</p>';
+        document.body.appendChild(div);
+        return false;
+      };
+
+      window.onunhandledrejection = function(event) {
+        var reason = event.reason;
+        var message = reason ? (reason.message || reason) : 'Unhandled promise rejection';
+        var stack = reason && reason.stack ? reason.stack : '';
+        
+        var div = document.createElement('div');
+        div.style.position = 'fixed';
+        div.style.top = '0';
+        div.style.left = '0';
+        div.style.width = '100%';
+        div.style.height = '100%';
+        div.style.backgroundColor = '#7f1d1d';
+        div.style.color = '#fff';
+        div.style.padding = '40px';
+        div.style.boxSizing = 'border-box';
+        div.style.zIndex = '99999';
+        div.style.fontFamily = 'monospace';
+        div.style.overflow = 'auto';
+        div.style.textAlign = 'left';
+        div.innerHTML = '<h1 style="font-size:24px;margin-top:0;">🚨 Unhandled Promise Rejection</h1>' +
+                        '<p><strong>Error:</strong> ' + message + '</p>' +
+                        '<pre style="background:rgba(0,0,0,0.3);padding:15px;border-radius:6px;overflow-x:auto;">' + (stack ? stack : 'No stack trace available') + '</pre>' +
+                        '<p style="margin-top:20px;font-size:14px;color:#fca5a5;">Please copy this error message and paste it in the chat so we can fix it instantly!</p>';
+        document.body.appendChild(div);
+      };
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Identity Services SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

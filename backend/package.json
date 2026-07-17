@@ -1,0 +1,24 @@
+{
+  "name": "linkflare-backend",
+  "version": "1.0.0",
+  "description": "Next-Generation Link Firewall & URL Shortener Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "geoip-lite": "^1.4.10",
+    "google-auth-library": "^9.14.2",
+    "helmet": "^8.3.0",
+    "pg": "^8.22.0",
+    "redis": "^6.1.0",
+    "sqlite3": "^5.1.7",
+    "ua-parser-js": "^1.0.39",
+    "winston": "^3.19.0"
+  }
+}

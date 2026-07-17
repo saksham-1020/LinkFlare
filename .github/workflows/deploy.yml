@@ -1,0 +1,46 @@
+name: LinkFlare Production CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        cache: 'npm'
+        cache-dependency-path: |
+          backend/package-lock.json
+          frontend/package-lock.json
+
+    # 1. Verify Backend Test Compliance
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm ci
+
+    - name: Run Firewall Engine Verification Tests
+      run: |
+        cd backend
+        node test_firewall.js
+
+    # 2. Verify Frontend Build Compliance
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Run Vite Production Compilation
+      run: |
+        cd frontend
+        npm run build
